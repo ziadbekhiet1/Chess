@@ -1,6 +1,6 @@
 package chess;
 
-public class ChessPiece {
+public abstract class ChessPiece {
 
 	private char color;
 	
@@ -13,4 +13,6 @@ public class ChessPiece {
 		
 		return this.color;
 	}
+	
+	public abstract boolean move();
 }

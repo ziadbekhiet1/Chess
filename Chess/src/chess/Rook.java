@@ -6,4 +6,9 @@ public class Rook extends ChessPiece {
 		
 		super(color);
 	}
+	
+	public boolean move() {
+		
+		return false;
+	}
 }

@@ -6,4 +6,9 @@ public class Pawn extends ChessPiece {
 		
 		super(color);
 	}
+	
+	public boolean move() {
+		
+		return false;
+	}
 }

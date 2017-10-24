@@ -12,6 +12,42 @@ public class Board {
 		initializeBoard();
 	}
 	
+	public ChessPiece getPiece(String boardCoords) {
+		
+		int row = (Integer.parseInt(boardCoords.substring(1)) - 1);
+		int col = 0;
+		
+		switch(boardCoords.charAt(0))
+		{
+		case 'a':
+			col = 0;
+			break;
+		case 'b':
+			col = 1;
+			break;
+		case 'c':
+			col = 2;
+			break;
+		case 'd':
+			col = 3;
+			break;
+		case 'e':
+			col = 4;
+			break;
+		case 'f':
+			col = 5;
+			break;
+		case 'g':
+			col = 6;
+			break;
+		case 'h':
+			col = 7;
+			break;
+		}
+		
+		return chessboard[row][col].getPiece();
+	}
+	
 	// Initializes the chess board to it's initial state
 	public final void initializeBoard() {
 		
