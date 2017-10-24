@@ -2,9 +2,9 @@ package chess;
 
 public class Pawn extends ChessPiece {
 
-	public Pawn(char color) {
+	public Pawn(Space location, char color) {
 		
-		super(color);
+		super(location, color);
 	}
 	
 	public boolean move(int destRow, int destCol) {

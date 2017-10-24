@@ -2,9 +2,9 @@ package chess;
 
 public class Bishop extends ChessPiece {
 
-	public Bishop(char color) { //color
+	public Bishop(Space location, char color) { //color
 		
-		super(color);
+		super(location, color);
 	}
 	
 	public boolean move(int destRow, int destCol) {

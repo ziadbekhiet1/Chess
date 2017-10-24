@@ -61,11 +61,11 @@ public class Board {
 				
 				if(bw) {
 					
-					chessboard[row][col] = new Space('w');
+					chessboard[row][col] = new Space(row, col, 'w');
 				}
 				else
 				{
-					chessboard[row][col] = new Space('b');
+					chessboard[row][col] = new Space(row, col, 'b');
 				}
 				
 				bw = !bw; 
@@ -78,31 +78,31 @@ public class Board {
 					if(row == 1) {
 						
 						//pawn
-						chessboard[row][col].setPiece(new Pawn('b'));
+						chessboard[row][col].setPiece(new Pawn(chessboard[row][col], 'b'));
 					} else if(col == 0 || col == 7) {
 						
 						// rook
-						chessboard[row][col].setPiece(new Rook('b'));
+						chessboard[row][col].setPiece(new Rook(chessboard[row][col], 'b'));
 					}
 					else if(col == 1 || col == 6) {
 						
 						// knight
-						chessboard[row][col].setPiece(new Knight('b'));
+						chessboard[row][col].setPiece(new Knight(chessboard[row][col], 'b'));
 					}
 					else if(col == 2 || col == 5) {
 						
 						// bishop
-						chessboard[row][col].setPiece(new Bishop('b'));
+						chessboard[row][col].setPiece(new Bishop(chessboard[row][col], 'b'));
 					}
 					else if(col == 3) {
 						
 						// queen
-						chessboard[row][col].setPiece(new Queen('b'));
+						chessboard[row][col].setPiece(new Queen(chessboard[row][col], 'b'));
 					}
 					else if(col == 4) {
 						
 						// king
-						chessboard[row][col].setPiece(new King('b'));
+						chessboard[row][col].setPiece(new King(chessboard[row][col], 'b'));
 					}
 					
 					chessboard[row][col].setOccupied(true);
@@ -113,32 +113,32 @@ public class Board {
 					if(row == 6) {
 						
 						// Pawn
-						chessboard[row][col].setPiece(new Pawn('w'));
+						chessboard[row][col].setPiece(new Pawn(chessboard[row][col], 'w'));
 					}
 					else if(col == 0 || col == 7) {
 						
 						// rook
-						chessboard[row][col].setPiece(new Rook('w'));
+						chessboard[row][col].setPiece(new Rook(chessboard[row][col], 'w'));
 					}
 					else if(col == 1 || col == 6) {
 						
 						// knight
-						chessboard[row][col].setPiece(new Knight('w'));
+						chessboard[row][col].setPiece(new Knight(chessboard[row][col], 'w'));
 					}
 					else if(col == 2 || col == 5) {
 						
 						// bishop
-						chessboard[row][col].setPiece(new Bishop('w'));
+						chessboard[row][col].setPiece(new Bishop(chessboard[row][col], 'w'));
 					}
 					else if(col == 3) {
 						
 						// queen
-						chessboard[row][col].setPiece(new Queen('w'));
+						chessboard[row][col].setPiece(new Queen(chessboard[row][col], 'w'));
 					}
 					else if(col == 4) {
 						
 						// king
-						chessboard[row][col].setPiece(new King('w'));
+						chessboard[row][col].setPiece(new King(chessboard[row][col], 'w'));
 					}
 					
 					chessboard[row][col].setOccupied(true);

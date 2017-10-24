@@ -2,9 +2,9 @@ package chess;
 
 public class Rook extends ChessPiece {
 
-	public Rook(char color) {
+	public Rook(Space location, char color) {
 		
-		super(color);
+		super(location, color);
 	}
 	
 	public boolean move(int destRow, int destCol) {

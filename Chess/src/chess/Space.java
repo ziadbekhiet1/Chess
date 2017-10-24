@@ -7,12 +7,26 @@ public class Space {
 	
 	private ChessPiece piece;
 	
-	public Space (char bw) {
+	private int row, col;
+	
+	public Space (int row, int col, char bw) {
 		
+		this.row = row;
+		this.col = col;
 		this.bw = bw;
 	}
 	
 	// getters & setters
+	
+	public int getRow() {
+		
+		return this.row;
+	}
+	
+	public int getCol() {
+		
+		return this.col;
+	}
 	
 	public char getBW() {
 		
