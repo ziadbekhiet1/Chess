@@ -12,10 +12,44 @@ public class Board {
 		initializeBoard();
 	}
 	
+	public Space getSpace(int row, int col) {
+		
+		return chessboard[row][col];
+	}
+	
 	public ChessPiece getPiece(String boardCoords) {
 		
-		int row = (Integer.parseInt(boardCoords.substring(1)) - 1);
+		int row = 0;
 		int col = 0;
+		
+		// Assign the row
+		switch(boardCoords.charAt(1))
+		{
+		case '1':
+			row = 7;
+			break;
+		case '2':
+			row = 6;
+			break;
+		case '3':
+			row = 5;
+			break;
+		case '4':
+			row = 4;
+			break;
+		case '5':
+			row = 3;
+			break;
+		case '6':
+			row = 2;
+			break;
+		case '7':
+			row = 1;
+			break;
+		case '8':
+			row = 0;
+			break;
+		}
 		
 		switch(boardCoords.charAt(0))
 		{

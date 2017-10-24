@@ -71,6 +71,7 @@ public class Chess {
 			if(input.equalsIgnoreCase("exit")) {
 				
 				winner = true;
+				reinput = false;
 			}
 			
 			if(input.length() == 5) {
@@ -136,10 +137,40 @@ public class Chess {
 					}
 					else {
 					
-						int row = (Integer.parseInt(source.substring(1)) - 1);
+						int row = 0;
 						int col = 0;
 						
-						switch(source.charAt(0))
+						// Assign the row
+						switch(destination.charAt(1))
+						{
+						case '1':
+							row = 7;
+							break;
+						case '2':
+							row = 6;
+							break;
+						case '3':
+							row = 5;
+							break;
+						case '4':
+							row = 4;
+							break;
+						case '5':
+							row = 3;
+							break;
+						case '6':
+							row = 2;
+							break;
+						case '7':
+							row = 1;
+							break;
+						case '8':
+							row = 0;
+							break;
+						}
+						
+						// Assign the column
+						switch(destination.charAt(0))
 						{
 						case 'a':
 							col = 0;
@@ -170,6 +201,7 @@ public class Chess {
 						if(!sourcePiece.move(board, row, col)) {
 							
 							System.out.println("ERROR: Invalid move.");
+							reinput = true;
 						}
 						else
 						{
