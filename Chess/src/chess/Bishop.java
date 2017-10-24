@@ -7,7 +7,7 @@ public class Bishop extends ChessPiece {
 		super(color);
 	}
 	
-	public boolean move() {
+	public boolean move(int destRow, int destCol) {
 		
 		return false;
 	}

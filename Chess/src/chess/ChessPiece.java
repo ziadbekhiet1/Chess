@@ -14,5 +14,5 @@ public abstract class ChessPiece {
 		return this.color;
 	}
 	
-	public abstract boolean move();
+	public abstract boolean move(int destRow, int destCol);
 }
