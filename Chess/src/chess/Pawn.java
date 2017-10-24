@@ -7,7 +7,9 @@ public class Pawn extends ChessPiece {
 		super(location, color);
 	}
 	
-	public boolean move(int destRow, int destCol) {
+	public boolean move(Board chessboard, int destRow, int destCol) {
+		
+		
 		
 		return false;
 	}

@@ -167,7 +167,7 @@ public class Chess {
 							break;
 						}
 						
-						if(!sourcePiece.move(row, col)) {
+						if(!sourcePiece.move(board, row, col)) {
 							
 							System.out.println("ERROR: Invalid move.");
 						}

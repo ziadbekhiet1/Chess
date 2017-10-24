@@ -26,5 +26,5 @@ public abstract class ChessPiece {
 		this.location = location;
 	}
 	
-	public abstract boolean move(int destRow, int destCol);
+	public abstract boolean move(Board chessboard, int destRow, int destCol);
 }
