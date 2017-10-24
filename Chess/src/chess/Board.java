@@ -8,7 +8,7 @@ public class Board {
 	// Constructor
 	public Board () {
 		
-		chessboard = new Space[9][9];
+		chessboard = new Space[8][8];
 		initializeBoard();
 	}
 	
