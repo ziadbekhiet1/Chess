@@ -9,7 +9,7 @@ public class Queen extends ChessPiece {
 	
 	public boolean move(Board chessboard, int destRow, int destCol) {
 		
-		Space loc = this.getLocation();
+        Space loc = this.getLocation();
         Space dest = chessboard.getSpace(destRow, destCol);
 
         System.out.println("Piece color: " + this.getColor());
@@ -17,12 +17,13 @@ public class Queen extends ChessPiece {
         int distanceCol = loc.getCol() - destCol; // y distance between
         int locRow = loc.getRow(); //x distance between
         int locCol = loc.getCol(); // y distance between
-
-        if (locRow == destRow || locCol == destCol) {
-            return true;
-        }
-        if (Math.abs(distanceRow) - Math.abs(distanceCol) == 0) { // y=x line so abs of both have to be 0
-            return true;
+        if (!dest.getOccupied() || dest.getBW() != this.getColor()) {
+            if (locRow == destRow || locCol == destCol) {
+                return true;
+            }
+            if (Math.abs(distanceRow) - Math.abs(distanceCol) == 0) { // y=x line so abs of both have to be 0
+                return true;
+            }
         }
 
         return false;
