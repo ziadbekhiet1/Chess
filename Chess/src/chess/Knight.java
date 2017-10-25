@@ -9,6 +9,18 @@ public class Knight extends ChessPiece {
 	
 	public boolean move(Board chessboard, int destRow, int destCol) {
 		
-		return false;
+		Space loc = this.getLocation();
+        Space dest = chessboard.getSpace(destRow, destCol);
+
+        System.out.println("Piece color: " + this.getColor());
+
+        int distanceRow = loc.getRow() - destRow; //x distance between
+        int distanceCol = loc.getCol() - destCol;
+        int locRow = loc.getRow(); //x distance between
+        int locCol = loc.getCol(); // y distance between
+        if (Math.abs(distanceRow) + Math.abs(distanceCol) == 3 && locRow != destRow || locCol != destCol ) {
+            return true;
+        }
+        return false;
 	}
 }
