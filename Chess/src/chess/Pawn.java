@@ -22,39 +22,28 @@ public class Pawn extends ChessPiece {
         System.out.println("Piece color: " + this.getColor());
 
         if(this.getColor() == 'w') {
-
-            // white piece
-
-            // check basic pawn forward movement constraints
-            if(destCol == loc.getCol() && (destRow == loc.getRow() + 1 || destRow == loc.getRow() + 2)) {
-
-                System.out.println("ERROR: Pawn can't move more than 2 spaces forward.");
+            if(destCol == loc.getCol() && (destRow == loc.getRow() - 1 || destRow == loc.getRow() - 2) && !dest.getOccupied()) {
                 return true;
             }
-            else if (destRow == loc.getRow() + 1 && (destCol == loc.getCol() + 1 || destCol == loc.getCol() - 1)) {
-                if(chessboard.castling(this.getLocation().getRow(), this.getLocation().getCol()) && this.getCanEmp()) {
+            else if (destRow == loc.getRow() - 1 && (destCol == loc.getCol() - 1 || destCol == loc.getCol() - 1)) {
+                if(chessboard.castling(this.getLocation().getRow(), this.getLocation().getCol()) && this.getCanEmp())
                     return true;
-                }
-                if (dest.getOccupied())
+                else if (dest.getOccupied())
                     return true;
             }
 
         }
         else {
-
-            if (destCol == loc.getCol() && (destRow == loc.getRow() - 1 || destRow == loc.getRow() - 2)) {
-
-                System.out.println("ERROR: Pawn can't move more than 2 spaces forward.");
+            if (destCol == loc.getCol() && (destRow == loc.getRow() + 1 || destRow == loc.getRow() + 2) && !dest.getOccupied()) {
                 return true;
             }
-            else if (destRow == loc.getRow() - 1 && (destCol == loc.getCol() + 1 || destCol == loc.getCol() - 1)) {
-                if (dest.getOccupied())
+            else if (destRow == loc.getRow() + 1 && (destCol == loc.getCol() + 1 || destCol == loc.getCol() - 1)) {
+                if(chessboard.castling(this.getLocation().getRow(), this.getLocation().getCol()) && this.getCanEmp())
                     return true;
-                if(chessboard.castling(this.getLocation().getRow(), this.getLocation().getCol()) && this.getCanEmp()) {
+                else if (dest.getOccupied())
                     return true;
                 }
             }
-        }
 
         return false;
     }
@@ -67,7 +56,6 @@ public class Pawn extends ChessPiece {
 
     public void setLastMove(int x) {
         this.lastmove = x;
-
     }
     public int getLastMove() {
         return this.lastmove;
