@@ -2,13 +2,14 @@ package chess;
 
 public class Bishop extends ChessPiece {
 
-	public Bishop(Space location, char color) { //color
-		
-		super(location, color);
-	}
-	
-	public boolean move(Board chessboard, int destRow, int destCol) {
-		
+    private int moved;
+    public Bishop(Space location, char color) { //color
+        super(location, color);
+        moved = 0;
+    }
+
+    public boolean move(Board chessboard, int destRow, int destCol) {
+
         Space loc = this.getLocation();
         Space dest = chessboard.getSpace(destRow, destCol);
 
@@ -23,6 +24,13 @@ public class Bishop extends ChessPiece {
         }
 
         return false;
-	}
+    }
+
+    public void incrementMoved() {
+        moved++;
+    }
+    public int getMoved() {
+        return moved;
+    }
 
 }
