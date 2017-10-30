@@ -1,15 +1,14 @@
 package chess;
-
-import view.*;
 public class Board {
 
     // Array representation of the chess board
     private Space[][] chessboard;
+    private int totalmoves;
 
     // Constructor
     public Board () {
         chessboard = new Space[8][8];
-
+        totalmoves = 0;
         initializeBoard();
     }
 
@@ -190,16 +189,16 @@ public class Board {
 
     public boolean check() {
 
-        for(int x = 0; x < 8; x++) 
-            for (int y = 0; y < 8; y++) 
-                if(chessboard[x][y].getPiece() instanceof King) 
+        for(int x = 0; x < 8; x++)
+            for (int y = 0; y < 8; y++)
+                if(chessboard[x][y].getPiece() instanceof King)
                     if(chessboard[x][y].getPiece().getColor() == 'w') {
                         for (int i = 0; i < 8; i++)
                             for (int j = 0; j < 8; j++)
                                 if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
                                     if (chessboard[i][j].getPiece().move(this, x, y))
                                         return true;
-                    }    
+                    }
                     else if (chessboard[x][y].getPiece().getColor() == 'b') {
                         for (int i = 0; i < 8; i++)
                             for (int j = 0; j < 8; j++)
@@ -208,10 +207,23 @@ public class Board {
                                         return true;
 
                     }
-        
+
         return false;
     }
-    
+
+    public boolean castling(int pawnRow, int pawnCol) {
+
+        if (chessboard[pawnRow+1][pawnCol].getPiece() instanceof Pawn && chessboard[pawnRow+1][pawnCol].getPiece().getMoved() == 1) {
+            ((Pawn) chessboard[pawnRow+1][pawnCol].getPiece()).setCanEmp(true);
+            return true;
+        }
+        if (chessboard[pawnRow-1][pawnCol].getPiece() instanceof Pawn && chessboard[pawnRow-1][pawnCol].getPiece().getMoved() == 1) {
+            ((Pawn) chessboard[pawnRow-1][pawnCol].getPiece()).setCanEmp(true);
+            return true;
+        }
+        return false;
+    }
+
     public boolean checkMate() {
         int a = 0;
         int b = 0;
@@ -219,7 +231,7 @@ public class Board {
         int d = 0;
         int countWhite = 0;
         int countBlack = 0;
-        for(int x = 0; x < 8; x++) 
+        for(int x = 0; x < 8; x++)
             for (int y = 0; y < 8; y++)
                 if (chessboard[x][y].getPiece() instanceof King) {
                     if (chessboard[x][y].getPiece().getColor() == 'w') {
@@ -230,93 +242,94 @@ public class Board {
                         d = y;
                     }
                 }
-
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
-                if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
-                    if (chessboard[i][j].getPiece().move(this,a+1 ,b)) 
-                        countWhite++;
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
-                if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
-                    if (chessboard[i][j].getPiece().move(this,a-1 ,b))
-                        countWhite++;
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
-                if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
-                    if (chessboard[i][j].getPiece().move(this,a ,b+1))
-                        countWhite++;
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
-                if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
-                    if (chessboard[i][j].getPiece().move(this,a ,b-1))
-                        countWhite++;
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
-                if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
-                    if (chessboard[i][j].getPiece().move(this,a+1 ,b+1))
-                        countWhite++;
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
-                if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
-                    if (chessboard[i][j].getPiece().move(this,a+1 ,b-1))
-                        countWhite++;
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
-                if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
-                    if (chessboard[i][j].getPiece().move(this,a-1 ,b+1))
-                        countWhite++;
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
-                if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
-                    if (chessboard[i][j].getPiece().move(this,a-1 ,b-1))
-                        countWhite++;
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
-                if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
-                    if (chessboard[i][j].getPiece().move(this,c+1 ,d))
-                        countWhite++;
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
-                if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
-                    if (chessboard[i][j].getPiece().move(this,c-1 ,d))
-                        countWhite++;
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
-                if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
-                    if (chessboard[i][j].getPiece().move(this, c ,d+1))
-                        countWhite++;
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
-                if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
-                    if (chessboard[i][j].getPiece().move(this,c ,d-1))
-                        countWhite++;
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
-                if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
-                    if (chessboard[i][j].getPiece().move(this,c+1 ,d+1))
-                        countWhite++;
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
-                if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
-                    if (chessboard[i][j].getPiece().move(this,c+1 ,d-1))
-                        countWhite++;
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
-                if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
-                    if (chessboard[i][j].getPiece().move(this,c-1 ,d+1))
-                        countWhite++;
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
-                if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
-                    if (chessboard[i][j].getPiece().move(this,c-1 ,d-1))
-                        countWhite++;
-        if (countWhite == 8 || countBlack == 8) {
-            return true;
+        if ((a>0 && a<7 && b>0 && b<7) || (c>0 && c<7 && d>0 && d<7)) {
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++)
+                    if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
+                        if (chessboard[i][j].getPiece().move(this, a + 1, b))
+                            countWhite++;
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++)
+                    if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
+                        if (chessboard[i][j].getPiece().move(this, a - 1, b))
+                            countWhite++;
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++)
+                    if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
+                        if (chessboard[i][j].getPiece().move(this, a, b + 1))
+                            countWhite++;
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++)
+                    if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
+                        if (chessboard[i][j].getPiece().move(this, a, b - 1))
+                            countWhite++;
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++)
+                    if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
+                        if (chessboard[i][j].getPiece().move(this, a + 1, b + 1))
+                            countWhite++;
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++)
+                    if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
+                        if (chessboard[i][j].getPiece().move(this, a + 1, b - 1))
+                            countWhite++;
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++)
+                    if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
+                        if (chessboard[i][j].getPiece().move(this, a - 1, b + 1))
+                            countWhite++;
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++)
+                    if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
+                        if (chessboard[i][j].getPiece().move(this, a - 1, b - 1))
+                            countWhite++;
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++)
+                    if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
+                        if (chessboard[i][j].getPiece().move(this, c + 1, d))
+                            countWhite++;
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++)
+                    if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
+                        if (chessboard[i][j].getPiece().move(this, c - 1, d))
+                            countWhite++;
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++)
+                    if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
+                        if (chessboard[i][j].getPiece().move(this, c, d + 1))
+                            countWhite++;
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++)
+                    if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
+                        if (chessboard[i][j].getPiece().move(this, c, d - 1))
+                            countWhite++;
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++)
+                    if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
+                        if (chessboard[i][j].getPiece().move(this, c + 1, d + 1))
+                            countWhite++;
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++)
+                    if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
+                        if (chessboard[i][j].getPiece().move(this, c + 1, d - 1))
+                            countWhite++;
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++)
+                    if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
+                        if (chessboard[i][j].getPiece().move(this, c - 1, d + 1))
+                            countWhite++;
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++)
+                    if (chessboard[i][j].getPiece() != null && chessboard[i][j].getPiece().getColor() == 'b')
+                        if (chessboard[i][j].getPiece().move(this, c - 1, d - 1))
+                            countWhite++;
+            if (countWhite == 8 || countBlack == 8) {
+                return true;
+            }
         }
         return false;
     }
-    
+
     // Prints out the board to the console
     public void printBoard() {
 
@@ -428,5 +441,6 @@ public class Board {
 
             System.out.println();
         }
+        totalmoves++;
     }
 }
