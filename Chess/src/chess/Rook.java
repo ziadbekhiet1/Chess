@@ -2,13 +2,15 @@ package chess;
 
 public class Rook extends ChessPiece {
 
-	public Rook(Space location, char color) {
-		
-		super(location, color);
-	}
-	
-	public boolean move(Board chessboard, int destRow, int destCol) {
-		
+    private int moved;
+
+    public Rook(Space location, char color) {
+        super(location, color);
+        moved = 0;
+    }
+
+    public boolean move(Board chessboard, int destRow, int destCol) {
+
         Space loc = this.getLocation();
         Space dest = chessboard.getSpace(destRow, destCol);
 
@@ -17,10 +19,16 @@ public class Rook extends ChessPiece {
         int locCol = loc.getCol(); // y distance between
         if (!dest.getOccupied() || dest.getBW() != this.getColor()) {
             if (locRow == destRow || locCol == destCol) {
+
                 return true;
             }
         }
 
         return false;
-	}
+    }
+
+    public void incrementMoved() { moved++;}
+    public int getMoved() {
+        return moved;
+    }
 }
