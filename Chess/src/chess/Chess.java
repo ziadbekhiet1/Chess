@@ -206,6 +206,18 @@ public class Chess {
 						else
 						{
 							System.out.println("MOVE SUCCESSFUL!");
+							
+							// sets the current space with the piece in question to not occupied
+							board.getSpace(sourcePiece.getLocation().getRow(), sourcePiece.getLocation().getCol()).setOccupied(false);
+							
+							// sets the new space where the piece will move to occupied
+							board.getSpace(row, col).setOccupied(true);
+							
+							// remove the piece from the space
+							board.getSpace(sourcePiece.getLocation().getRow(), sourcePiece.getLocation().getCol()).setPiece(null);
+							
+							// assign the destination space piece to source piece (move the piece)
+							board.getSpace(row, col).setPiece(sourcePiece);
 						}
 					}
 				}
