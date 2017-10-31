@@ -2,11 +2,11 @@ package chess;
 
 public class Rook extends ChessPiece {
 
-    private int moved;
+    private int lastmove;
 
     public Rook(Space location, char color) {
         super(location, color);
-        moved = 0;
+        lastmove = 0;
     }
 
     public boolean move(Board chessboard, int destRow, int destCol) {
@@ -27,8 +27,10 @@ public class Rook extends ChessPiece {
         return false;
     }
 
-    public void incrementMoved() { moved++;}
-    public int getMoved() {
-        return moved;
+    public void setLastMove(int x) {
+        this.lastmove = x;
+    }
+    public int getLastMove() {
+        return this.lastmove;
     }
 }
