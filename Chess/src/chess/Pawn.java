@@ -17,58 +17,46 @@ public class Pawn extends ChessPiece {
     public boolean move(Board chessboard, int destRow, int destCol) {
 
         Space loc = this.getLocation();
+        System.out.println(this.getColor());
         Space dest = chessboard.getSpace(destRow, destCol);
+        System.out.println(destRow + " " + destCol);
 
         System.out.println("Piece color: " + this.getColor());
 
-        if(this.getColor() == 'w') {
-            if(destCol == loc.getCol() && (destRow == loc.getRow() - 1 || destRow == loc.getRow() - 2) && !dest.getOccupied()) {
+        if (this.getColor() == 'w') {
+            if (destCol == loc.getCol() && (destRow == loc.getRow() - 1 || destRow == loc.getRow() - 2) && !dest.getOccupied()) {
                 return true;
             }
-            else if (destRow == loc.getRow() - 1 && (destCol == loc.getCol() - 1 || destCol == loc.getCol() - 1)) {
-                if(chessboard.castling(this.getLocation().getRow(), this.getLocation().getCol()) && this.getCanEmp())
+            else if (destRow == loc.getRow() - 1 && (destCol == loc.getCol() - 1 || destCol == loc.getCol() + 1)) {
+                if ((chessboard.getSpace(destRow-1 , destCol).getPiece() instanceof Pawn && chessboard.getSpace(destRow-1, destCol).getPiece().getLastMove() == chessboard.getTotalmoves()-1) && !dest.getOccupied()){
                     return true;
-                else if (dest.getOccupied())
+                }
+                else if (dest.getOccupied() && dest.getPiece().getColor() != this.getColor()) {
                     return true;
-            }
 
-        }
-        else {
-            if (destCol == loc.getCol() && (destRow == loc.getRow() + 1 || destRow == loc.getRow() + 2) && !dest.getOccupied()) {
-                return true;
-            }
-            else if (destRow == loc.getRow() + 1 && (destCol == loc.getCol() + 1 || destCol == loc.getCol() - 1)) {
-                if(chessboard.castling(this.getLocation().getRow(), this.getLocation().getCol()) && this.getCanEmp())
-                    return true;
-                else if (dest.getOccupied())
-                    return true;
                 }
             }
 
+        }
+        else if(this.getColor() == 'b') {
+            if (destCol == loc.getCol() && (destRow == loc.getRow() + 1 || destRow == loc.getRow() + 2) && !dest.getOccupied()) {
+                return true;
+            } else if (destRow == loc.getRow() + 1 && (destCol == loc.getCol() - 1 || destCol == loc.getCol() + 1)) {
+                if ((chessboard.getSpace(destRow + 1, destCol).getPiece() instanceof Pawn && chessboard.getSpace(destRow + 1, destCol).getPiece().getLastMove() == chessboard.getTotalmoves() - 1) && !dest.getOccupied()) {
+                    return true;
+                } else if (dest.getOccupied() && dest.getPiece().getColor() != this.getColor()) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
-    public void incrementMoved() {
-        moved++;
-    }
-    public int getMoved() {
-        return moved;
-    }
-
     public void setLastMove(int x) {
         this.lastmove = x;
     }
     public int getLastMove() {
         return this.lastmove;
     }
-    public void setCanEmp(boolean x) {
-        this.canEmp = x;
-    }
-    public boolean getCanEmp() {
-        return canEmp;
-    }
-
-
-
 
 
 }
