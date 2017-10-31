@@ -2,10 +2,10 @@ package chess;
 
 public class Bishop extends ChessPiece {
 
-    private int moved;
+    private int lastmove;
     public Bishop(Space location, char color) { //color
         super(location, color);
-        moved = 0;
+        lastmove = 0;
     }
 
     public boolean move(Board chessboard, int destRow, int destCol) {
@@ -26,11 +26,10 @@ public class Bishop extends ChessPiece {
         return false;
     }
 
-    public void incrementMoved() {
-        moved++;
+    public void setLastMove(int x) {
+        this.lastmove = x;
     }
-    public int getMoved() {
-        return moved;
+    public int getLastMove() {
+        return this.lastmove;
     }
-
 }
