@@ -2,12 +2,12 @@ package chess;
 
 public class Knight extends ChessPiece {
 
-    private int moved;
+    private int lastmove;
 
     public Knight(Space location, char color) {
         super(location, color);
 
-        moved = 0;
+        lastmove = 0;
     }
 
     public boolean move(Board chessboard, int destRow, int destCol) {
@@ -30,10 +30,10 @@ public class Knight extends ChessPiece {
         }
         return false;
     }
-    public void incrementMoved() {
-        moved++;
+    public void setLastMove(int x) {
+        this.lastmove = x;
     }
-    public int getMoved() {
-        return moved;
+    public int getLastMove() {
+        return this.lastmove;
     }
 }
