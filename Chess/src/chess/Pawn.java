@@ -17,11 +17,11 @@ public class Pawn extends ChessPiece {
     public boolean move(Board chessboard, int destRow, int destCol) {
 
         Space loc = this.getLocation();
-        System.out.println(this.getColor());
+       // System.out.println(this.getColor());
         Space dest = chessboard.getSpace(destRow, destCol);
-        System.out.println(destRow + " " + destCol);
+        //System.out.println(destRow + " " + destCol);
 
-        System.out.println("Piece color: " + this.getColor());
+        //System.out.println("Piece color: " + this.getColor());
 
         if (this.getColor() == 'w') {
             if (destCol == loc.getCol() && (destRow == loc.getRow() - 1 || destRow == loc.getRow() - 2) && !dest.getOccupied()) {

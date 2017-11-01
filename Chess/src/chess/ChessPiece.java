@@ -27,6 +27,9 @@ public abstract class ChessPiece {
     }
 
     public abstract boolean move(Board chessboard, int destRow, int destCol);
-    public abstract void incrementMoved();
-    public abstract int getMoved();
+
+    public abstract void setLastMove(int x);
+
+    public abstract int getLastMove();
+
 }

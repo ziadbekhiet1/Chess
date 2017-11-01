@@ -15,7 +15,7 @@ public class Knight extends ChessPiece {
         Space loc = this.getLocation();
         Space dest = chessboard.getSpace(destRow, destCol);
 
-        System.out.println("Piece color: " + this.getColor());
+        //System.out.println("Piece color: " + this.getColor());
 
         int distanceRow = loc.getRow() - destRow; //x distance between
         int distanceCol = loc.getCol() - destCol;
