@@ -21,7 +21,7 @@ public class Knight extends ChessPiece {
         int distanceCol = loc.getCol() - destCol;
         int locRow = loc.getRow(); //x distance between
         int locCol = loc.getCol(); // y distance between
-        if (!dest.getOccupied() || dest.getBW() != this.getColor()) {
+        if (!dest.getOccupied() || dest.getPiece().getColor() != this.getColor()) {
             if (Math.abs(distanceRow) + Math.abs(distanceCol) == 3) {
                 if (locRow != destRow || locCol != destCol) {
                     return true;
