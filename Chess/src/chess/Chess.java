@@ -7,6 +7,8 @@ public class Chess {
     static Scanner scan = new Scanner(System.in);
     static boolean winner = false;
     static boolean resign = false;
+    static boolean draw = false;
+    static int drawVal = 0;
     static Board board;
 
     public static void playGame() {
@@ -53,7 +55,12 @@ public class Chess {
 
         } while(!winner);
 
-        if(turn) {
+        
+        if(draw) {
+        	
+        	System.out.println("DRAW!");
+        	
+        } else if(turn) {
 
         	if(!resign) {
         		 System.out.println("WHITE WINS!");
@@ -72,10 +79,6 @@ public class Chess {
 	       		System.out.println("WHITE WINS!");
 	       	}
         }
-        else {
-            System.out.println("Draw");
-        }
-
     }
 
     public static void turn(boolean turn) {
@@ -104,15 +107,22 @@ public class Chess {
                 winner = true;
                 resign = true;
                 reinput = false;
-            } 
+            }
             
-            if(input.length() == 5) {
+            if(input.equalsIgnoreCase("draw") && drawVal == 1) {
+            	
+            	draw = true;
+            	winner = true;
+            } else
+            
+            if(input.length() == 5 || input.length() == 11) {
 
+            	drawVal = 0;
                 String source = input.substring(0, 2);
                 String destination = input.substring(3, 5);
 
-                System.out.println("Source piece: " + source);
-                System.out.println("Destination location: " + destination);
+                //System.out.println("Source piece: " + source);
+                //System.out.println("Destination location: " + destination);
 
                 // Check input
                 if((source.charAt(0) != 'a'
@@ -157,6 +167,14 @@ public class Chess {
                     reinput = false;
 
                     // if input is good... do stuff
+                    
+                    if(input.length() == 11) {
+                    	
+                    	if(input.substring(5).equalsIgnoreCase(" draw?")) {
+                    		
+                    		drawVal = 1;
+                    	}
+                    }
 
                     //System.out.println("Valid input");
 
@@ -242,6 +260,67 @@ public class Chess {
                         else
                         {
                             System.out.println("MOVE SUCCESSFUL!");
+                            board.incrementTotalMoves(board);
+                            sourcePiece.setLastMove(board.getTotalmoves());
+
+                            if (sourcePiece instanceof King) {
+                                if (sourcePiece.getLastMove() == 0) {
+                                    int distanceCol = col-sourcePiece.getLocation().getCol();
+                                    int distanceRow = row-sourcePiece.getLocation().getRow();
+                                    if (row == sourcePiece.getLocation().getRow() && (Math.abs(distanceCol) == 2) && sourcePiece.getColor() == 'b') {
+                                        if (!board.getSpace(row,col).getOccupied() && board.getSpace(0, 0).getPiece() instanceof Rook && board.getSpace(0, 0).getPiece().getLastMove() == 0 && board.getSpace(0, 7).getPiece() instanceof Rook && board.getSpace(0, 7).getPiece().getLastMove() == 0) {
+                                            board.getSpace(sourcePiece.getLocation().getRow(), sourcePiece.getLocation().getCol()).setOccupied(false);
+                                            board.getSpace(sourcePiece.getLocation().getRow(), sourcePiece.getLocation().getCol()).setPiece(null);
+                                            board.getSpace(row, col).setOccupied(true);
+                                            board.getSpace(row, col).setPiece(sourcePiece);
+                                            sourcePiece.setLocation(board.getSpace(row,col));
+                                            if (distanceCol>0){
+                                                Space rook1 = board.getSpace(0,7);
+                                                board.getSpace(rook1.getPiece().getLocation().getRow(), rook1.getPiece().getLocation().getCol()).setOccupied(false);
+                                                board.getSpace(rook1.getPiece().getLocation().getRow(), rook1.getPiece().getLocation().getCol()).setPiece(null);
+                                                board.getSpace(row-2, col).setOccupied(true);
+                                                board.getSpace(row-2, col).setPiece(rook1.getPiece());
+                                                rook1.getPiece().setLocation(board.getSpace(row-2,col));
+                                            }
+                                            else if(distanceCol<0){
+                                                Space rook1 = board.getSpace(0,7);
+                                                board.getSpace(rook1.getPiece().getLocation().getRow(), rook1.getPiece().getLocation().getCol()).setOccupied(false);
+                                                board.getSpace(rook1.getPiece().getLocation().getRow(), rook1.getPiece().getLocation().getCol()).setPiece(null);
+                                                board.getSpace(row+2, col).setOccupied(true);
+                                                board.getSpace(row+2, col).setPiece(rook1.getPiece());
+                                                rook1.getPiece().setLocation(board.getSpace(row+2,col));
+                                            }
+
+                                        }
+                                    } else if (row == sourcePiece.getLocation().getRow() && (Math.abs(distanceCol) == 2) && sourcePiece.getColor() == 'w') {
+                                        if (!board.getSpace(row,col).getOccupied() && board.getSpace(0, 0).getPiece() instanceof Rook && board.getSpace(0, 0).getPiece().getLastMove() == 0 && board.getSpace(0, 7).getPiece() instanceof Rook && board.getSpace(0, 7).getPiece().getLastMove() == 0) {
+                                            board.getSpace(sourcePiece.getLocation().getRow(), sourcePiece.getLocation().getCol()).setOccupied(false);
+                                            board.getSpace(sourcePiece.getLocation().getRow(), sourcePiece.getLocation().getCol()).setPiece(null);
+                                            board.getSpace(row, col).setOccupied(true);
+                                            board.getSpace(row, col).setPiece(sourcePiece);
+                                            sourcePiece.setLocation(board.getSpace(row,col));
+                                            if (distanceCol>0){
+                                                Space rook1 = board.getSpace(0,7);
+                                                board.getSpace(rook1.getPiece().getLocation().getRow(), rook1.getPiece().getLocation().getCol()).setOccupied(false);
+                                                board.getSpace(rook1.getPiece().getLocation().getRow(), rook1.getPiece().getLocation().getCol()).setPiece(null);
+                                                board.getSpace(row-2, col).setOccupied(true);
+                                                board.getSpace(row-2, col).setPiece(rook1.getPiece());
+                                                rook1.getPiece().setLocation(board.getSpace(row-2,col));
+                                            }
+                                            else if(distanceCol<0){
+                                                Space rook1 = board.getSpace(0,7);
+                                                board.getSpace(rook1.getPiece().getLocation().getRow(), rook1.getPiece().getLocation().getCol()).setOccupied(false);
+                                                board.getSpace(rook1.getPiece().getLocation().getRow(), rook1.getPiece().getLocation().getCol()).setPiece(null);
+                                                board.getSpace(row+2, col).setOccupied(true);
+                                                board.getSpace(row+2, col).setPiece(rook1.getPiece());
+                                                rook1.getPiece().setLocation(board.getSpace(row+2,col));
+                                            }
+
+                                        }
+                                    }
+                                }
+                            }
+                            System.out.println(sourcePiece.getLastMove());
 
                             // sets the current space with the piece in question to not occupied
                             board.getSpace(sourcePiece.getLocation().getRow(), sourcePiece.getLocation().getCol()).setOccupied(false);
@@ -257,6 +336,47 @@ public class Chess {
                             sourcePiece.setLocation(board.getSpace(row,col));
                             board.getSpace(row,col).getPiece().setLastMove(board.getTotalmoves());
                             System.out.println(board.getSpace(row,col).getPiece());
+                            System.out.println("Total moves: " + board.getTotalmoves());
+                            if (sourcePiece instanceof Pawn && sourcePiece.getColor() == 'w' && sourcePiece.getLocation().getRow() == 0) {
+                                // Assign the column
+                                if (input.length() == 7) {
+                                    switch (input.charAt(6)) {
+                                        case 'N':
+                                            board.getSpace(row, col).setPiece(new Knight(board.getSpace(row, col), 'w'));
+                                            break;
+                                        case 'B':
+                                            board.getSpace(row, col).setPiece(new Bishop(board.getSpace(row, col), 'w'));
+                                            break;
+                                        case 'R':
+                                            board.getSpace(row, col).setPiece(new Rook(board.getSpace(row, col), 'w'));
+                                            break;
+
+                                    }
+                                }
+                                else {
+                                    board.getSpace(row, col).setPiece(new Queen(board.getSpace(row, col), 'w'));
+                                }
+                            }
+                            else if (sourcePiece instanceof Pawn && sourcePiece.getColor() == 'b' && sourcePiece.getLocation().getRow() == 7) {
+                            // Assign the column
+                            if (input.length() == 7) {
+                                switch (input.charAt(6)) {
+                                    case 'N':
+                                        board.getSpace(row, col).setPiece(new Knight(board.getSpace(row, col), 'b'));
+                                        break;
+                                    case 'B':
+                                        board.getSpace(row, col).setPiece(new Bishop(board.getSpace(row, col), 'b'));
+                                        break;
+                                    case 'R':
+                                        board.getSpace(row, col).setPiece(new Rook(board.getSpace(row, col), 'b'));
+                                        break;
+
+                                }
+                            }
+                            else {
+                                board.getSpace(row, col).setPiece(new Queen(board.getSpace(row, col), 'b'));
+                            }
+                        }
                         }
                         }
                     }

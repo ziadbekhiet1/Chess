@@ -193,7 +193,7 @@ public class Board {
         for (int x = 0; x < 8; x++) {
             for (int y = 0; y < 8; y++) {
                 if (board.getSpace(x,y).getPiece() instanceof King) {
-                    System.out.println("White King is at  " + x + " " + y);
+                    //System.out.println("White King is at  " + x + " " + y);
                     if (board.getSpace(x,y).getPiece().getColor() == 'w') {
                         System.out.print(1);
                         for (int i = 0; i < 8; i++) {
@@ -201,9 +201,9 @@ public class Board {
                                 if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
                                     ChessPiece sourcepiece = board.getSpace(i, j).getPiece();
                                     if (sourcepiece.move(board, x, y)) {
-                                        System.out.println(2);
-                                        System.out.println("White King is at:  " + x + " " + y);
-                                        System.out.println("Black pieces are at" + i + " " + j);
+                                        //System.out.println(2);
+                                        //System.out.println("White King is at:  " + x + " " + y);
+                                        //System.out.println("Black pieces are at" + i + " " + j);
                                         return 1;
                                     }
                                 }
@@ -226,9 +226,9 @@ public class Board {
                                 if (board.getSpace(i,j).getPiece() != null && board.getSpace(i,j).getPiece().getColor() == 'w') {
                                     ChessPiece sourcepiece = board.getSpace(i,j).getPiece();
                                     if (sourcepiece.move(board, x, y)) {
-                                        System.out.print(4);
-                                        System.out.println("White King is at:  " + x + " " + y);
-                                        System.out.println("Black pieces are at" + " " + j);
+                                       // System.out.print(4);
+                                        //System.out.println("White King is at:  " + x + " " + y);
+                                        //System.out.println("Black pieces are at" + " " + j);
                                         return 1;
                                     }
                                 }
@@ -1713,9 +1713,12 @@ public class Board {
 
             System.out.println();
         }
-        totalmoves++;
     }
     public int getTotalmoves() {
         return totalmoves;
+    }
+    
+    public void incrementTotalMoves(Board board) {
+        this.totalmoves++;
     }
 }
