@@ -148,11 +148,15 @@ public class Chess {
                     System.out.println("Valid input");
 
                     ChessPiece sourcePiece = board.getPiece(source);
-
+                    
                     if(sourcePiece == null)
                     {
                         System.out.println("No piece at that source.");
                         reinput = true;
+                    } else if((turn && sourcePiece.getColor() == 'b') || (!turn && sourcePiece.getColor() == 'w')){
+                    	
+                    	System.out.println("Piece selected is a different color than your color.");
+                    	reinput = true;
                     }
                     else {
 
