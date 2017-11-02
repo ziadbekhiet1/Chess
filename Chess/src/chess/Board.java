@@ -1,11 +1,28 @@
 package chess;
 
+/**
+ * Represents a standard chess board, which is populated
+ * by numerous spaces from the Space class.
+ * 
+ * @author Michael Allen
+ * @author Ziad Bekhiet
+ */
 public class Board {
 
+	/**
+	 * Array representation of the chessboard
+	 */
     // Array representation of the chess board
     private Space[][] chessboard;
+    
+    /**
+     * number of moves total in the game so far
+     */
     private int totalmoves;
 
+    /**
+     * Creates a new instance of board, and sets up the chess board format
+     */
     // Constructor
     public Board () {
         chessboard = new Space[8][8];
@@ -13,11 +30,22 @@ public class Board {
         initializeBoard();
     }
 
+    /**
+     * Returns a space of the board given the row and column
+     * @param row the row of the space to be returned
+     * @param col the column of the space to be returned
+     * @return the space at (row, col)
+     */
     public Space getSpace(int row, int col) {
 
         return chessboard[row][col];
     }
 
+    /**
+     * returns the piece on a board given a string of rowcol
+     * @param boardCoords a string that represents the coordinates of the space
+     * @return the piece on the space
+     */
     public ChessPiece getPiece(String boardCoords) {
 
         int row = 0;
@@ -83,6 +111,9 @@ public class Board {
         return chessboard[row][col].getPiece();
     }
 
+    /**
+     * Initializes the chess board to it's initial state
+     */
     // Initializes the chess board to it's initial state
     public final void initializeBoard() {
 
@@ -188,6 +219,11 @@ public class Board {
         }
     }
 
+    /**
+     * Checks for check for white
+     * @param board the chessboard at a given check
+     * @return 1 or 0, 0 if not in check
+     */
     public int checkWhite(Board board) {
 
         for (int x = 0; x < 8; x++) {
@@ -195,7 +231,7 @@ public class Board {
                 if (board.getSpace(x,y).getPiece() instanceof King) {
                     //System.out.println("White King is at  " + x + " " + y);
                     if (board.getSpace(x,y).getPiece().getColor() == 'w') {
-                        System.out.print(1);
+                        //System.out.print(1);
                         for (int i = 0; i < 8; i++) {
                             for (int j = 0; j < 8; j++) {
                                 if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
@@ -215,6 +251,12 @@ public class Board {
         }
         return 0;
     }
+    
+    /**
+     * Checks for check for black
+     * @param board the chessboard at a given check
+     * @return 1 or 0, 0 if not in check
+     */
     public int checkBlack(Board board) {
 
         for (int x = 0; x < 8; x++) {
@@ -240,6 +282,12 @@ public class Board {
         }
         return 0;
     }
+    
+    /**
+     * Checks for checkmate conditions for white
+     * @param board the instance of the board at the check
+     * @return 1 or 0, 0 if not checkmate
+     */
     public int checkMateforWhite(Board board) {
         int a = 0;
         int b = 0;
@@ -746,7 +794,7 @@ public class Board {
                     }
                 }
             }
-            System.out.println(countWhite);
+            //System.out.println(countWhite);
             if (countWhite == 5) {
                 return 1;
             }
@@ -921,6 +969,11 @@ public class Board {
         return 0;
     }
 
+    /**
+     * Checks for checkmate conditions for black
+     * @param board the instance of the board at the check
+     * @return 1 or 0, 0 if not checkmate
+     */
     public int checkMateforBlack(Board board) {
         int a = 0;
         int b = 0;
@@ -1427,7 +1480,7 @@ public class Board {
                     }
                 }
             }
-            System.out.println(countWhite);
+            //System.out.println(countWhite);
             if (countWhite == 5) {
                 return 1;
             }
@@ -1602,6 +1655,9 @@ public class Board {
         return 0;
     }
 
+    /**
+     * Prints the board out to the console
+     */
     // Prints out the board to the console
     public void printBoard() {
 
@@ -1714,10 +1770,19 @@ public class Board {
             System.out.println();
         }
     }
+    
+    /**
+     * Returns the total number of moves
+     * @return the total number of moves
+     */
     public int getTotalmoves() {
         return totalmoves;
     }
     
+    /**
+     * Increments the total number of moves by 1
+     * @param board takes the current state of the chessboard
+     */
     public void incrementTotalMoves(Board board) {
         this.totalmoves++;
     }

@@ -2,6 +2,12 @@ package chess;
 
 import java.util.Scanner;
 
+/**
+ * The main class of our chess application.
+ * 
+ * @author Michael Allen
+ * @author Ziad Bekhiet
+ */
 public class Chess {
 
     static Scanner scan = new Scanner(System.in);
@@ -11,6 +17,9 @@ public class Chess {
     static int drawVal = 0;
     static Board board;
 
+    /**
+     * Runs the game, including the turn order and color
+     */
     public static void playGame() {
 
         boolean turn = false; 		// true - white, false - black
@@ -81,6 +90,10 @@ public class Chess {
         }
     }
 
+    /**
+     * Represents a chess turn, including input validation
+     * @param turn the color of the turn (true - white, false - black)
+     */
     public static void turn(boolean turn) {
 
         boolean reinput = false;
@@ -253,13 +266,13 @@ public class Chess {
                         }
 
                         if(!sourcePiece.move(board, row, col)) {
-                            System.out.println(board.getSpace(row,col).getPiece());
+                            //System.out.println(board.getSpace(row,col).getPiece());
                             System.out.println("Illegal move, please try again.");
                             reinput = true;
                         }
                         else
                         {
-                            System.out.println("MOVE SUCCESSFUL!");
+                            //System.out.println("MOVE SUCCESSFUL!");
                             board.incrementTotalMoves(board);
                             sourcePiece.setLastMove(board.getTotalmoves());
 
@@ -320,7 +333,7 @@ public class Chess {
                                     }
                                 }
                             }
-                            System.out.println(sourcePiece.getLastMove());
+                            //System.out.println(sourcePiece.getLastMove());
 
                             // sets the current space with the piece in question to not occupied
                             board.getSpace(sourcePiece.getLocation().getRow(), sourcePiece.getLocation().getCol()).setOccupied(false);
@@ -335,8 +348,8 @@ public class Chess {
                             board.getSpace(row, col).setPiece(sourcePiece);
                             sourcePiece.setLocation(board.getSpace(row,col));
                             board.getSpace(row,col).getPiece().setLastMove(board.getTotalmoves());
-                            System.out.println(board.getSpace(row,col).getPiece());
-                            System.out.println("Total moves: " + board.getTotalmoves());
+                            //System.out.println(board.getSpace(row,col).getPiece());
+                            //System.out.println("Total moves: " + board.getTotalmoves());
                             if (sourcePiece instanceof Pawn && sourcePiece.getColor() == 'w' && sourcePiece.getLocation().getRow() == 0) {
                                 // Assign the column
                                 if (input.length() == 7) {
@@ -394,6 +407,10 @@ public class Chess {
         } while(reinput == true);
     }
 
+    /**
+     * The main method
+     * @param args input arguments
+     */
     public static void main(String args[]) {
 
         playGame();
