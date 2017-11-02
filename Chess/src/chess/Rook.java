@@ -19,7 +19,7 @@ public class Rook extends ChessPiece {
         //System.out.println("Piece color: " + this.getColor());
         int distanceRow = destRow - loc.getRow(); //x distance between
         int distanceCol = destCol - loc.getCol(); // y distance between
-        if (!dest.getOccupied() || dest.getBW() != this.getColor()) {
+        if (!dest.getOccupied() && dest.getBW() != this.getColor()) {
             if (loc.getRow() == destRow) {
                 if (distanceCol>0) {
                     for (int i = 1; i < Math.abs(distanceCol); i++) {
