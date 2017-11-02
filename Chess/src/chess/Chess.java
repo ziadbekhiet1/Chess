@@ -6,6 +6,7 @@ public class Chess {
 
     static Scanner scan = new Scanner(System.in);
     static boolean winner = false;
+    static boolean resign = false;
     static Board board;
 
     public static void playGame() {
@@ -54,11 +55,22 @@ public class Chess {
 
         if(turn) {
 
-            System.out.println("WHITE WINS!");
+        	if(!resign) {
+        		 System.out.println("WHITE WINS!");
+        	}
+        	else {
+        		System.out.println("BLACK WINS!");
+        	}
+           
         }
         else if(!turn) {
 
-            System.out.println("BLACK WINS!");
+        	if(!resign) {
+       		 System.out.println("BLACK WINS!");
+	       	}
+	       	else {
+	       		System.out.println("WHITE WINS!");
+	       	}
         }
         else {
             System.out.println("Draw");
@@ -87,12 +99,13 @@ public class Chess {
 
             String input = scan.nextLine();
 
-            if(input.equalsIgnoreCase("exit")) {
+            if(input.equalsIgnoreCase("resign")) {
 
                 winner = true;
+                resign = true;
                 reinput = false;
-            }
-
+            } 
+            
             if(input.length() == 5) {
 
                 String source = input.substring(0, 2);
@@ -145,17 +158,17 @@ public class Chess {
 
                     // if input is good... do stuff
 
-                    System.out.println("Valid input");
+                    //System.out.println("Valid input");
 
                     ChessPiece sourcePiece = board.getPiece(source);
                     
                     if(sourcePiece == null)
                     {
-                        System.out.println("No piece at that source.");
+                        System.out.println("ERROR: No piece at that source.");
                         reinput = true;
                     } else if((turn && sourcePiece.getColor() == 'b') || (!turn && sourcePiece.getColor() == 'w')){
                     	
-                    	System.out.println("Piece selected is a different color than your color.");
+                    	System.out.println("ERROR: Piece selected is a different color than your color.");
                     	reinput = true;
                     }
                     else {
@@ -223,7 +236,7 @@ public class Chess {
 
                         if(!sourcePiece.move(board, row, col)) {
                             System.out.println(board.getSpace(row,col).getPiece());
-                            System.out.println("ERROR: Invalid move.");
+                            System.out.println("Illegal move, please try again.");
                             reinput = true;
                         }
                         else
@@ -250,7 +263,10 @@ public class Chess {
                 }
             else {
 
-                System.out.println("ERROR: Invalid input. Please try again.");
+            	if(!winner) {
+            		
+            		System.out.println("ERROR: Invalid input. Please try again.");
+            	}
             }
 
 
