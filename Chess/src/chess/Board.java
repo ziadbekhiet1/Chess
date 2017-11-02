@@ -1,4 +1,5 @@
 package chess;
+
 public class Board {
 
     // Array representation of the chess board
@@ -254,432 +255,671 @@ public class Board {
         }
         if (a>0 && a<7 && b>0 && b<7){
             int countWhite = 0;
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
-                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                        if (board.getSpace(i, j).getPiece().move(board, a + 1, b)) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
+                        if (board.getSpace(i, j).getPiece().move(board, a+1, b)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                        if (board.getSpace(i, j).getPiece().move(board, a - 1, b)) {
+                        if (board.getSpace(i, j).getPiece().move(board, a-1, b)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a-1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
                         if (board.getSpace(i, j).getPiece().move(board, a, b + 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
                         if (board.getSpace(i, j).getPiece().move(board, a, b - 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
                         if (board.getSpace(i, j).getPiece().move(board, a + 1, b + 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
                         if (board.getSpace(i, j).getPiece().move(board, a + 1, b - 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
                         if (board.getSpace(i, j).getPiece().move(board, a - 1, b + 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a-1, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
                         if (board.getSpace(i, j).getPiece().move(board, a - 1, b - 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a-1, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
-            if (countWhite == 0){
+
+            if (countWhite == 8){
                 return 1;
             }
         }
-       else if (a==0 && b==0) {
-           int countWhite = 0;
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a + 1, b)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a, b + 1)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a + 1, b + 1)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           if (countWhite == 0) {
-               return 1;
-           }
-
-       }
-       else if (a==0 && b==7) {
-           int countWhite = 0;
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a, b - 1)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a + 1, b)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a + 1, b - 1)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-
-           if (countWhite == 0) {
-               return 1;
-           }
-
-       }
-      else if (a==7 && b==0) {
-           int countWhite = 0;
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a - 1, b)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a - 1, b + 1)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a, b + 1)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           if (countWhite == 0) {
-               return 1;
-           }
-       }
-       else if (a==7 && b==7) {
+        else if (a==0 && b==0) {
             int countWhite = 0;
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a, b - 1)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a - 1, b - 1)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a - 1, b)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           if (countWhite == 0) {
-               return 1;
-           }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a + 1, b)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a, b + 1)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a + 1, b + 1)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            if (countWhite == 3) {
+                return 1;
+            }
 
-       }
-       else if (a==7 && b!=7 && b!=0) {
+        }
+        else if (a==0 && b==7) {
             int countWhite = 0;
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a - 1, b)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a, b + 1)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a , b-1)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a - 1, b + 1)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a - 1, b - 1)) {
-                           countWhite++;
-                       }
-                   }
-               }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a, b - 1)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b- 1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a + 1, b)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a + 1, b - 1)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
 
-           }
-           if (countWhite == 0){
-               return 1;
-           }
+            if (countWhite == 3) {
+                return 1;
+            }
 
-       }
-       else if (a==0 && b!=0 && b!=7) {
+        }
+        else if (a==7 && b==0) {
             int countWhite = 0;
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a + 1, b)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a, b + 1)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a, b - 1)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a + 1, b + 1)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a + 1, b - 1)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           if (countWhite == 0) {
-               return 1;
-           }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a - 1, b)) {
+                            countWhite++;
+                            break outerloop;
+                        } else if (board.getSpace(a - 1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a - 1, b + 1)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a-1, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a, b + 1)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            if (countWhite == 3) {
+                return 1;
+            }
+        }
+        else if (a==7 && b==7) {
+            int countWhite = 0;
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a, b - 1)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a - 1, b - 1)) {
+                            countWhite++;
+                            break outerloop;
+                        }else if (board.getSpace(a-1, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a - 1, b)) {
+                            countWhite++;
+                            break outerloop;
+                        }else if (board.getSpace(a-1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            if (countWhite == 3) {
+                return 1;
+            }
+
+        }
+        else if (a==7 && b!=7 && b!=0) {
+            int countWhite = 0;
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a - 1, b)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a-1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a, b + 1)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a , b-1)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a - 1, b + 1)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a-1, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a - 1, b - 1)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a-1, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+
+            }
+            if (countWhite == 5){
+                return 1;
+            }
+
+        }
+        else if (a==0 && b!=0 && b!=7) {
+            int countWhite = 0;
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a + 1, b)) {
+                            countWhite++;
+                            break outerloop;
+
+                        }
+                        else if (board.getSpace(a+1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a, b + 1)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a, b - 1)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a + 1, b + 1)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a + 1, b - 1)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            System.out.println(countWhite);
+            if (countWhite == 5) {
+                return 1;
+            }
 
         }
         else if (b==0 && a!=0 && a!=7) {
             int countWhite = 0;
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a + 1, b)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a - 1, b)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a, b + 1)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a + 1, b + 1)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a - 1, b + 1)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           if (countWhite == 0){
-               return 1;
-           }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a + 1, b)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a - 1, b)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a-1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a, b + 1)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a + 1, b + 1)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a - 1, b + 1)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a-1, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            if (countWhite == 5){
+                return 1;
+            }
 
 
         }
-       else if (b==7 && a!=7 && a!=0) {
+        else if (b==7 && a!=7 && a!=0) {
             int countWhite = 0;
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a + 1, b)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a - 1, b)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a, b - 1)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a + 1, b - 1)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           for (int i = 0; i < 8; i++) {
-               for (int j = 0; j < 8; j++) {
-                   if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
-                       if (board.getSpace(i, j).getPiece().move(board, a - 1, b - 1)) {
-                           countWhite++;
-                       }
-                   }
-               }
-           }
-           if (countWhite == 0){
-               return 1;
-           }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a + 1, b)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a - 1, b)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a-1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a, b - 1)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a + 1, b - 1)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            outerloop:
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'b') {
+                        if (board.getSpace(i, j).getPiece().move(board, a - 1, b - 1)) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a-1, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+            if (countWhite == 5){
+                return 1;
+            }
         }
 
 
-            return 0;
-        }
+        return 0;
+    }
 
     public int checkMateforBlack(Board board) {
         int a = 0;
@@ -696,425 +936,664 @@ public class Board {
         }
         if (a>0 && a<7 && b>0 && b<7){
             int countWhite = 0;
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
-                        if (board.getSpace(i, j).getPiece().move(board, a + 1, b)) {
+                        if (board.getSpace(i, j).getPiece().move(board, a+1, b)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
-                        if (board.getSpace(i, j).getPiece().move(board, a - 1, b)) {
+                        if (board.getSpace(i, j).getPiece().move(board, a-1, b)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a-1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a, b + 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a, b - 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a + 1, b + 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a + 1, b - 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a - 1, b + 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a-1, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a - 1, b - 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a-1, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
-            if (countWhite == 0){
+
+            if (countWhite == 8){
                 return 1;
             }
         }
-        if (a==0 && b==0) {
+        else if (a==0 && b==0) {
             int countWhite = 0;
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a + 1, b)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a, b + 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a + 1, b + 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
-            if (countWhite == 0) {
+            if (countWhite == 3) {
                 return 1;
             }
 
         }
-        if (a==0 && b==7) {
+        else if (a==0 && b==7) {
             int countWhite = 0;
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a, b - 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b- 1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a + 1, b)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
-
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a + 1, b - 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
 
-            if (countWhite == 0) {
+            if (countWhite == 3) {
                 return 1;
             }
 
         }
-        if (a==7 && b==0) {
+        else if (a==7 && b==0) {
             int countWhite = 0;
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a - 1, b)) {
                             countWhite++;
+                            break outerloop;
+                        } else if (board.getSpace(a - 1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a - 1, b + 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a-1, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a, b + 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
-            if (countWhite == 0) {
+            if (countWhite == 3) {
                 return 1;
             }
         }
-        if (a==7 && b==7) {
+        else if (a==7 && b==7) {
             int countWhite = 0;
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a, b - 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a - 1, b - 1)) {
                             countWhite++;
+                            break outerloop;
+                        }else if (board.getSpace(a-1, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a - 1, b)) {
                             countWhite++;
+                            break outerloop;
+                        }else if (board.getSpace(a-1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
-            if (countWhite == 0) {
+            if (countWhite == 3) {
                 return 1;
             }
 
         }
-        if (a==7 && b!=7) {
+        else if (a==7 && b!=7 && b!=0) {
             int countWhite = 0;
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a - 1, b)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a-1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a, b + 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
-                        if (board.getSpace(i, j).getPiece().move(board, a, b - 1)) {
+                        if (board.getSpace(i, j).getPiece().move(board, a , b-1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a - 1, b + 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a-1, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a - 1, b - 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a-1, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
 
             }
-            if (countWhite == 0){
+            if (countWhite == 5){
                 return 1;
             }
 
         }
-        if (a==0 && b!=0 && b!=7) {
+        else if (a==0 && b!=0 && b!=7) {
             int countWhite = 0;
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a + 1, b)) {
                             countWhite++;
+                            break outerloop;
+
+                        }
+                        else if (board.getSpace(a+1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a, b + 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a, b - 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a + 1, b + 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b+1).getOccupied()) {
+                            countWhite++;
+                             break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a + 1, b - 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
-            if (countWhite == 0) {
+            System.out.println(countWhite);
+            if (countWhite == 5) {
                 return 1;
             }
 
         }
-        if (b==0 && a!=0 && a!=7) {
+        else if (b==0 && a!=0 && a!=7) {
             int countWhite = 0;
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a + 1, b)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a - 1, b)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a-1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a, b + 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a + 1, b + 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a - 1, b + 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a-1, b+1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
-            if (countWhite == 0){
+            if (countWhite == 5){
                 return 1;
             }
 
 
         }
-        if (b==7 && a!=7 && a!=0) {
+        else if (b==7 && a!=7 && a!=0) {
             int countWhite = 0;
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a + 1, b)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a - 1, b)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a-1, b).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a, b - 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a + 1, b - 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a+1, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
+            outerloop:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (board.getSpace(i, j).getPiece() != null && board.getSpace(i, j).getPiece().getColor() == 'w') {
                         if (board.getSpace(i, j).getPiece().move(board, a - 1, b - 1)) {
                             countWhite++;
+                            break outerloop;
+                        }
+                        else if (board.getSpace(a-1, b-1).getOccupied()) {
+                            countWhite++;
+                            break outerloop;
                         }
                     }
                 }
             }
-            if (countWhite == 0){
+            if (countWhite == 5){
                 return 1;
             }
         }
